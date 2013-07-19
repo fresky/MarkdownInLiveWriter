@@ -10,7 +10,8 @@ then put it in the [WindowsLiveWriterPath]\Plugins\.
 
 ## Usage
 
-Please refer to the ![screenshot](https://github.com/fresky/MarkdownInLiveWriter/blob/master/screenshot.png). 
+Please refer to the below screen shot.
+![screenshot](https://raw.github.com/fresky/MarkdownInLiveWriter/master/screenshot.png "MarkdownInLiveWriter")
 
 1. Click the **Insert** menu in Windows Live Writer, then click the **Insert Markdown**.
 2. Write your blog in the left panel with Markdown, you can see the live preview in the right Panel.
