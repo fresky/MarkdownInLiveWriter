@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  
+  <!--
+  Wix Installer for a WLW PlugIn.
+  Verified against Wix version 2.0.5325.0. 
+  
+  This is adapted from http://bplo.spaces.live.com/blog/cns!CF2831C0AE64E81B!210.entry.  
+  
+  See http://msdn2.microsoft.com/en-us/library/aa738841.aspx for rules on distributing plug-ins.
+  
+  1) The RegKey "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Live\Writer\InstallDir" tells what 
+  directory WLW is installed in. This is valid in Beta 3.
+  
+  2) If "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Live\Writer InstallDir" is defined instead,
+  then a pre-Beta 3 version is installed.
+  
+  3) Copy the Files to the PlugIn sub-directory of that #1.
+  
+  Other caveats:
+  - This does not support Upgrading a PlugIn.
+  - To specify a License, include 'License.rtf' file in the current directory when you run Light.exe.
+  - This uses a minimal UI.
+  -->
+
+  
+  
+  <Product Name="Markdown Plugin for Windows Live Writer" Id="{546B417E-E872-42bf-AC34-5FCD574DF0A3}"
+		Language="1033" Codepage="1252" Version="1.0.0"
+		Manufacturer="Dawei Xu">
+	<Package
+	  Id="9AA29767-2E0C-450f-A043-34E6B9F476C9"
+	  Description="This is a Markdown Plugin for Windows Live Writer, for more information please go to https://github.com/fresky/MarkdownInLiveWriter"
+	  Manufacturer="Dawei Xu"
+	  InstallerVersion="200"
+	  Compressed="yes" />
+
+
+	<!-- This script is very basic and doesn't have any custom UI -->
+	<UIRef Id="WixUI_Minimal" />
+
+	<!-- Lookup the installation directory from the registry. 
+	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Live\Writer\InstallDir
+	-->
+	<Property Id="INSTALLDIR">
+	  <RegistrySearch Id='GetInstallDir' Type='raw'
+		Root='HKLM' Key='SOFTWARE\Microsoft\Windows Live\Writer' Name='InstallDir' />
+	</Property>
+
+	<WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+	
+	<!-- Launch Conditions.	Ensure that WLW is actually installed -->
+	
+	<Condition Message="Windows Live Writer is not installed. 
+						Please install Windows Live Writer from http://writer.live.com .">
+	  <![CDATA[  NOT (NOT INSTALLDIR) ]]>
+	</Condition>
+	
+	<!-- End of Launch conditions -->
+
+	<Media Id="1" Cabinet="MarkdownInLiveWriter.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
+
+	<Property Id="DiskPrompt" Value="{MarkdownInLiveWriter} Installation [1]" />
+
+	<Directory Id="TARGETDIR" Name="SourceDir">
+		  <Directory Id="INSTALLDIR">
+			<Directory Id="Plugins" Name="Plugins">
+			  <Component Id="MarkdownInLiveWriter" Guid="{7776E0B1-249A-435e-9E90-6BEE92296105}">
+				<!-- The raw dll to copy to the PlugIns folder -->
+				<File 
+				  Id="File_MarkdownInLiveWriter" 
+				  Name="MarkdownInLiveWriter.dll"
+				  DiskId="1" 
+				  Source="MarkdownInLiveWriter.dll" 
+				  Vital="yes" />
+			  </Component>
+			</Directory>
+		  </Directory>
+		</Directory>
+
+
+	<!-- Components are grouped into "Features". 
+	As a plug-in, we have a single feature, which is to copy the plugin dll.
+	We don't have any UI to select features.
+	-->
+	<Feature Id="Complete" 
+			 Level="1"
+			 Title="MarkdownInLiveWriter"
+			 Description="This is a Markdown Plugin for Windows Live Writer, for more information please go to https://github.com/fresky/MarkdownInLiveWriter"
+			 Display="expand">
+	  <ComponentRef Id="MarkdownInLiveWriter" />
+	</Feature>
+  </Product>
+</Wix>

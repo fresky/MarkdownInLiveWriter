@@ -20,14 +20,22 @@ Please refer to the below screen shot.
 5. Click the "Highlight" button to preview the code highlight.
 5. Click the **Insert** button, then the content will be inserted to the Windows Live Writer.
 
-
 ## Requirements
 
 Please install [Windows Live Writer](http://windows.microsoft.com/en-us/windows-live/essentials-other#essentials=overviewother)
 
+## Build Installer
+Install [Wixtoolset](http://wixtoolset.org/). Then run the following 2 commands:  
+
+    Wixpath\candle.exe -out markdowninlivewriter.wixobj MarkdownInLiveWriter.wxs   
+    Wixpath\light.exe -ext WixUIExtension MarkdownInLiveWriter.wixobj
+
+
 ## Credits
 
 This project is using [markdownsharp](http://code.google.com/p/markdownsharp/), which is a open source C# implementation of Markdown processor.
+
+And the wix file is base on the [Mike Stall's post](http://blogs.msdn.com/b/jmstall/archive/2007/10/27/wix-script-for-installing-live-writer-plugins.aspx).
 
 ## License
 
@@ -35,5 +43,6 @@ MarkdownInLiveWriter is released under the MIT License. See the bundled LICENSE 
 
 ## Chang Log
 
+1. 08/01/2013	add the wix installer file
 1. 07/19/2013	support code syntax highlight
 1. 07/16/2013	initial version
