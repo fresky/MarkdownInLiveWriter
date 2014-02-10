@@ -7,12 +7,12 @@ This project is a markdown plugin for [Windows Live Writer](http://windows.micro
 
 **Option 1:**
 
-Download the [MarkdownInLiveWriter.dll](https://github.com/fresky/MarkdownInLiveWriter/blob/master/MarkdownInLiveWriter.dll), 
+Download the [MarkdownInLiveWriter.dll](https://github.com/fresky/MarkdownInLiveWriter/raw/master/MarkdownInLiveWriter.dll), 
 then put it in the [WindowsLiveWriterPath]\Plugins\.
 
 **Option 2:**
 
-Download the [MarkdownInLiveWriter.msi](https://github.com/fresky/MarkdownInLiveWriter/blob/master/MarkdownInLiveWriter.msi), then run the installer. 
+Download the [MarkdownInLiveWriter.msi](https://github.com/fresky/MarkdownInLiveWriter/raw/master/MarkdownInLiveWriter.msi), then run the installer. 
 
 ## Usage
 
